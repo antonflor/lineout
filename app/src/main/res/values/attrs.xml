@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MonoTextView">
+        <!-- Which brand font to use -->
+        <attr name="mfont" format="enum">
+            <enum name="plex" value="0" />
+            <enum name="plexBold" value="1" />
+            <enum name="jb" value="2" />
+            <enum name="jbMedium" value="3" />
+            <enum name="jbBold" value="4" />
+        </attr>
+    </declare-styleable>
+</resources>

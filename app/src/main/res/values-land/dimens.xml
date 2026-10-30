@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Phone in landscape: short screen, tighten vertical rhythm -->
+    <dimen name="screen_pad">14dp</dimen>
+    <dimen name="clock_size">40sp</dimen>
+    <dimen name="np_art">48dp</dimen>
+    <dimen name="row_pad_v">10dp</dimen>
+    <integer name="drawer_cols">2</integer>
+</resources>

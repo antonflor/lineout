@@ -1,0 +1,55 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Lint + debug build
+        run: ./gradlew --no-daemon lintRelease assembleDebug
+
+      # Release signing key comes from repo secrets (never committed):
+      #   LINEOUT_KEYSTORE_B64, LINEOUT_KEYSTORE_PASSWORD, LINEOUT_KEY_ALIAS, LINEOUT_KEY_PASSWORD
+      - name: Signed release build
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          LINEOUT_KEYSTORE_B64: ${{ secrets.LINEOUT_KEYSTORE_B64 }}
+          LINEOUT_KEYSTORE_PASSWORD: ${{ secrets.LINEOUT_KEYSTORE_PASSWORD }}
+          LINEOUT_KEY_ALIAS: ${{ secrets.LINEOUT_KEY_ALIAS }}
+          LINEOUT_KEY_PASSWORD: ${{ secrets.LINEOUT_KEY_PASSWORD }}
+        run: |
+          if [ -z "$LINEOUT_KEYSTORE_B64" ]; then
+            echo "::error::Release signing secrets are not set"; exit 1
+          fi
+          echo "$LINEOUT_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+          export LINEOUT_KEYSTORE="$RUNNER_TEMP/release.jks"
+          ./gradlew --no-daemon assembleRelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lineout-apks
+          path: app/build/outputs/apk/**/*.apk
+
+      - name: Attach APK to GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: app/build/outputs/apk/release/Lineout-*.apk
+          generate_release_notes: true

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_pad">32dp</dimen>
+    <dimen name="clock_size">84sp</dimen>
+    <dimen name="date_size">16sp</dimen>
+    <dimen name="status_size">13sp</dimen>
+    <dimen name="row_text">17sp</dimen>
+    <dimen name="btn_text">16sp</dimen>
+    <dimen name="np_title">18sp</dimen>
+    <dimen name="np_art">72dp</dimen>
+    <dimen name="row_pad_v">14dp</dimen>
+    <integer name="drawer_cols">2</integer>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lineout</string>
+    <string name="settings_title">SYS_CONFIG</string>
+
+    <string name="status_left">LINEOUT // 1.0</string>
+    <string name="np_header">NOW_PLAYING</string>
+    <string name="np_no_access">NO_SIGNAL // MEDIA ACCESS REQUIRED</string>
+    <string name="np_waiting">CONNECTION STABLE. AWAITING SIGNAL.</string>
+    <string name="np_grant">[ GRANT_ACCESS ]</string>
+    <string name="btn_apps">[ APPS ]</string>
+    <string name="btn_sys">[ SYS ]</string>
+    <string name="btn_prev">[&lt;&lt;]</string>
+    <string name="btn_play">[ &gt; ]</string>
+    <string name="btn_pause">[ || ]</string>
+    <string name="btn_next">[&gt;&gt;]</string>
+    <string name="fav_header">PINNED //</string>
+    <string name="fav_empty">&gt; NO_PINS. LONG-PRESS AN APP TO PIN IT HERE.</string>
+    <string name="drawer_title">ALL_APPS</string>
+    <string name="search_hint">&gt; SEARCH</string>
+    <string name="set_default">[ SET_AS_DEFAULT_LAUNCHER ]</string>
+</resources>

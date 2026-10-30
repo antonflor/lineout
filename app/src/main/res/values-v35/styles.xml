@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android 15 forces edge-to-edge for targetSdk 35. Keep the solid
+         status/nav bars so the terminal layout never sits underneath them. -->
+    <style name="Theme.Monty" parent="Base.Theme.Monty">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>

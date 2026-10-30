@@ -1,0 +1,13 @@
+build_out/
+toolchain/
+.gradle/
+build/
+app/build/
+local.properties
+.idea/
+*.iml
+
+# Signing secrets: never commit
+keystore.properties
+*.keystore
+*.jks

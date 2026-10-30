@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Release signing comes from keystore.properties (git-ignored) or from
+// environment variables in CI. Without either, release builds are unsigned
+// and debug builds use the standard Android debug key.
+def ksProps = new Properties()
+def ksFile = rootProject.file('keystore.properties')
+if (ksFile.exists()) {
+    ksFile.withInputStream { ksProps.load(it) }
+}
+def ksValue = { String key, String env ->
+    ksProps.getProperty(key) ?: System.getenv(env)
+}
+def releaseStore = ksValue('storeFile', 'LINEOUT_KEYSTORE')
+def hasReleaseKey = releaseStore != null && rootProject.file(releaseStore).exists()
+
+android {
+    namespace 'xyz.montylabs.lineout'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "xyz.montylabs.lineout"
+        minSdk 29
+        targetSdk 35
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    signingConfigs {
+        if (hasReleaseKey) {
+            release {
+                storeFile rootProject.file(releaseStore)
+                storePassword ksValue('storePassword', 'LINEOUT_KEYSTORE_PASSWORD')
+                keyAlias ksValue('keyAlias', 'LINEOUT_KEY_ALIAS')
+                keyPassword ksValue('keyPassword', 'LINEOUT_KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+        }
+        release {
+            minifyEnabled false
+            if (hasReleaseKey) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds true
+        disable 'GradleDependency', 'OldTargetApi', 'SetTextI18n', 'IconLauncherShape',
+                'MonochromeLauncherIcon', 'ObsoleteSdkInt'
+    }
+}
+
+// Name release APKs Lineout-<version>.apk
+android.applicationVariants.configureEach { variant ->
+    variant.outputs.configureEach {
+        outputFileName = "Lineout-${variant.versionName}.apk"
+    }
+}
+
+// Zero dependencies on purpose: pure framework APIs keep the launcher tiny
+// and instant on low-RAM DAP hardware.

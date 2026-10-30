@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.Monty" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/system_black</item>
+        <item name="android:colorBackground">@color/system_black</item>
+        <item name="android:statusBarColor">@color/system_black</item>
+        <item name="android:navigationBarColor">@color/system_black</item>
+        <item name="android:colorAccent">@color/signal_green</item>
+        <item name="android:colorControlActivated">@color/signal_green</item>
+        <item name="android:colorControlNormal">@color/dim_white</item>
+        <item name="android:colorControlHighlight">@color/green_dim</item>
+        <item name="android:textColorPrimary">@color/stark_white</item>
+        <item name="android:textColorSecondary">@color/dim_white</item>
+        <item name="android:textColorHint">@color/dim_white</item>
+        <item name="android:alertDialogTheme">@style/Theme.Monty.Dialog</item>
+        <item name="android:windowShowWallpaper">false</item>
+    </style>
+
+    <style name="Theme.Monty" parent="Base.Theme.Monty" />
+
+    <style name="Theme.Monty.Dialog" parent="android:Theme.Material.Dialog.NoActionBar">
+        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="android:colorBackground">@color/system_black</item>
+        <item name="android:colorAccent">@color/signal_green</item>
+        <item name="android:textColorPrimary">@color/stark_white</item>
+        <item name="android:textColorSecondary">@color/dim_white</item>
+        <item name="android:colorControlActivated">@color/signal_green</item>
+        <item name="android:colorControlHighlight">@color/green_dim</item>
+    </style>
+
+    <!-- Bordered terminal button: solid border / transparent fill, inverts when pressed -->
+    <style name="MontyBtn">
+        <item name="android:background">@drawable/btn_white</item>
+        <item name="android:textColor">@color/txt_btn_white</item>
+        <item name="android:textSize">@dimen/btn_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">14dp</item>
+        <item name="android:paddingRight">14dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="MontyBtn.Green">
+        <item name="android:background">@drawable/btn_green</item>
+        <item name="android:textColor">@color/txt_btn_green</item>
+    </style>
+</resources>
